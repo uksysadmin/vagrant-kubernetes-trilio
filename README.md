@@ -28,7 +28,7 @@ Trilio is not associated with the above company in any way.
 
 1. Working Vagrant setup (https://vagrantup.com)
 2. Working VirtualBox setup (https://www.virtualbox.org/)
-3. At least 8 Gig + RAM workstation as the VMs use 2 vCPUS and 4+ GB RAM
+3. At least 12 Gig + RAM workstation as the VMs use 2 vCPUS and 4+ GB RAM
 
 Configure spec of the VMs in the file called Vagrantfile.
 
