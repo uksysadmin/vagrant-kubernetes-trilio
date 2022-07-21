@@ -78,8 +78,6 @@ kubectl proxy
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
 ```
 
-## TrilioVault for Kubernetes UI Documentation  
-https://docs.trilio.io/kubernetes/management-console-ui/navigating-intro/guided-tours
 
 ## Kubernetes login token
 
@@ -104,6 +102,8 @@ This will allow you to access the TrilioVault for Kubernetes UI from your PC/Mac
 http://localhost:8002/
 ```
 
+## TrilioVault for Kubernetes UI Documentation  
+https://docs.trilio.io/kubernetes/management-console-ui/navigating-intro/guided-tours
 
 ## To shutdown the cluster,
 
