@@ -45,7 +45,7 @@ kubeadm token create --print-join-command > /vagrant/configs/join.sh
 
 # Install Flannel
 #kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-kubectl apply -f /vagrant/kube-flannel.yml
+kubectl apply -f /vagrant/scripts/kube-flannel.yml
 
 # Install Metrics Server
 
