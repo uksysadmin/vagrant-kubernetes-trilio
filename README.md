@@ -21,6 +21,9 @@ Trilio is not associated with the above company in any way.
 - HostPath CSI Driver
 - TrilioVault for Kubernetes 2.10.1
 
+## Asciinema Preview
+[![asciicast](https://asciinema.org/a/509999.svg)](https://asciinema.org/a/509999)
+
 ## Prerequisites
 
 1. Working Vagrant setup
