@@ -1,7 +1,9 @@
 
 # Vagrantfile and Scripts to Automate Kubernetes and TrilioVaut for Kubernetes
-# Trilio, inc. https://trilio.io/
-# Author: Kevin Jackson, Principal Solutions Architect kevin.jackson <at> trilio <dot> io
+## Trilio, inc. https://trilio.io/
+## Author: Kevin Jackson, Principal Solutions Architect kevin.jackson <at> trilio <dot> io
+
+
 
 ## Original Credit
 This set of Vagrant scripts is originally based on https://github.com/techiescamp/vagrant-kubeadm-kubernetes - an environment that will prepare you for the CKA, CKAD, CKS or KCNA exams.
@@ -51,7 +53,7 @@ cd vagrant-kubernetes-trilio
 vagrant up
 ```
 
-## Set Kubeconfig file variable
+## Set Kubeconfig file variable to access the Kubernetes cluster from your PC/Mac
 
 ```shell
 cd vagrant-kubernetes-trilio
@@ -66,19 +68,42 @@ cp config ~/.kube/
 ```
 
 ## Kubernetes Dashboard URL
+Run a Proxy in a terminal, then access using the following URL
+
+```shell
+kubectl proxy
+```
 
 ```shell
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
 ```
 
+## TrilioVault for Kubernetes UI Documentation  
+https://docs.trilio.io/kubernetes/management-console-ui/navigating-intro/guided-tours
+
 ## Kubernetes login token
 
-Vagrant up will create the admin user token and saves in the configs directory.
+To log in to the Kubernetes Dashboard using the URL above, vagrant up will create the admin user token and saves in the configs directory.
 
 ```shell
 cd vagrant-kubernetes-trilio/configs
 cat token
 ```
+
+## TrilioVault for Kubernetes UI Dashboard
+During the default install of TVK, we use a self-created ingress. To access the UI from your desktop you can set up a port-forwarder.
+In a terminal, run the following:
+
+```shell
+kubectl port-forward --address 0.0.0 svc/k8s-triliovault-ingress-hnginx-controller 8002:80
+```
+
+This will allow you to access the TrilioVault for Kubernetes UI from your PC/Mac at the following address:
+
+```shell
+http://localhost:8002/
+```
+
 
 ## To shutdown the cluster,
 
