@@ -11,6 +11,7 @@ configs/
 .DS_Store
 .AppleDouble
 .LSOverride
+*.swp
 
 # Icon must end with two \r
 Icon
@@ -33,3 +34,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+license.*
+*.tgz

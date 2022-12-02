@@ -97,7 +97,7 @@ During the default install of TVK, we use a self-created ingress. To access the 
 In a terminal, run the following:
 
 ```shell
-kubectl port-forward --address 0.0.0 svc/k8s-triliovault-ingress-hnginx-controller 8002:80
+kubectl port-forward --address 0.0.0.0 svc/k8s-triliovault-ingress-nginx-controller 8002:80
 ```
 
 This will allow you to access the TrilioVault for Kubernetes UI from your PC/Mac at the following address:
