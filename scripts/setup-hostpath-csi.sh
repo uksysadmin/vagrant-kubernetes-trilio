@@ -28,7 +28,7 @@ echo "Waiting for Containers to start..."
 sleep 30
 echo "Running some PVC Tests and Snapshots..."
 
-for i in ./examples/csi-storageclass.yaml ./examples/csi-pvc.yaml ./examples/csi-app.yaml /vagrant/scriptscsi-snapshot-v1.yaml
+for i in ./examples/csi-storageclass.yaml ./examples/csi-pvc.yaml ./examples/csi-app.yaml /vagrant/scripts/csi-snapshot-v1.yaml
 do 
 	kubectl apply -f $i
 done
