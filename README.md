@@ -60,15 +60,14 @@ vagrant up
 ## Set Kubeconfig file variable to access the Kubernetes cluster from your PC/Mac
 
 ```shell
-cd vagrant-kubernetes-trilio
-cd configs
-export KUBECONFIG=$(pwd)/config
+# From the current directory of Vagrantfile
+export KUBECONFIG=$(pwd)/configs/config
 ```
 
 or you can copy the config file to .kube directory.
 
 ```shell
-cp config ~/.kube/
+cp configs/config ~/.kube/
 ```
 
 ## Kubernetes Dashboard URL
@@ -88,8 +87,8 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 To log in to the Kubernetes Dashboard using the URL above, vagrant up will create the admin user token and saves in the configs directory.
 
 ```shell
-cd vagrant-kubernetes-trilio/configs
-cat token
+# From the current directory of Vagrantfile
+cat configs/token
 ```
 
 ## TrilioVault for Kubernetes UI Dashboard
@@ -119,6 +118,18 @@ vagrant halt
 
 ```shell
 vagrant up
+```
+
+## To suspend the cluster,
+
+```shell
+vagrant suspend
+```
+
+## To restart the suspended cluster,
+
+```shell
+vagrant resume
 ```
 
 ## To destroy the cluster,

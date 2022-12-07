@@ -40,15 +40,14 @@ chmod +x /vagrant/configs/join.sh
 
 kubeadm token create --print-join-command > /vagrant/configs/join.sh
 
-# Install Calico Network Plugin
-
-#curl https://docs.projectcalico.org/manifests/calico.yaml -O
-
-#kubectl apply -f calico.yaml
-
 # Install Flannel
 #kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubectl apply -f /vagrant/scripts/kube-flannel.yml
+
+sleep 10
+
+# Workaround for cni0 bridge issue
+sudo ip link delete cni0 type bridge
 
 sleep 10
 
