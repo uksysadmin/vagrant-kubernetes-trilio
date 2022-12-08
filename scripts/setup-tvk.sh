@@ -10,8 +10,7 @@ sleep 1
 helm install tvm triliovault-operator/k8s-triliovault-operator 2>/dev/null
 helm list
 
-sleep 1
+echo "Installation of TVK will be a few minutes..."
 
-kubectl --namespace=default get deployments -l "release=triliovault-operator"
-sleep 120
+sleep 420
 kubectl --namespace=default get deployments -l "release=triliovault-operator"
