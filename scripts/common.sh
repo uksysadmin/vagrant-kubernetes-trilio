@@ -14,7 +14,6 @@ sudo swapoff -a
 # keeps the swaf off during reboot
 (crontab -l 2>/dev/null; echo "@reboot /sbin/swapoff -a") | crontab - || true
 sudo apt-get update -y
-sudo apt-get upgrade -y
 # Install CRI-O Runtime
 
 OS="xUbuntu_20.04"
@@ -52,21 +51,13 @@ curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/
 sudo apt-get update
 sudo apt-get install cri-o cri-o-runc -y
 
-# Fix cni0 IP addressing
-mkdir -p /etc/cni/net.d
-rm -f /etc/cni/net.d/100-crio-bridge.conf
-cp /vagrant/scripts/100-crio-bridge.conf /etc/cni/net.d/100-crio-bridge.conf
-
-
-sleep 5
-
 sudo systemctl daemon-reload
 sudo systemctl enable crio --now
 
 echo "CRI runtime installed susccessfully"
 
 sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl nfs-common
+sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list

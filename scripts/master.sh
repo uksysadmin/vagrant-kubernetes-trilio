@@ -6,17 +6,13 @@ set -euxo pipefail
 
 MASTER_IP="10.0.0.10"
 NODENAME=$(hostname -s)
-#POD_CIDR="192.168.0.0/16"
-POD_CIDR="10.244.0.0/16"
+POD_CIDR="192.168.0.0/16"
 
 sudo kubeadm config images pull
 
 echo "Preflight Check Passed: Downloaded All Required Images"
-sleep 5
 
 sudo kubeadm init --apiserver-advertise-address=$MASTER_IP --apiserver-cert-extra-sans=$MASTER_IP --pod-network-cidr=$POD_CIDR --node-name "$NODENAME" --ignore-preflight-errors Swap
-
-sleep 5
 
 mkdir -p "$HOME"/.kube
 sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
@@ -40,26 +36,19 @@ chmod +x /vagrant/configs/join.sh
 
 kubeadm token create --print-join-command > /vagrant/configs/join.sh
 
-# Install Flannel
-#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-kubectl apply -f /vagrant/scripts/kube-flannel.yml
+# Install Calico Network Plugin
 
-sleep 10
+curl https://docs.projectcalico.org/manifests/calico.yaml -O
 
-# Workaround for cni0 bridge issue
-sudo ip link delete cni0 type bridge
-
-sleep 10
+kubectl apply -f calico.yaml
 
 # Install Metrics Server
 
 kubectl apply -f https://raw.githubusercontent.com/scriptcamp/kubeadm-scripts/main/manifests/metrics-server.yaml
-sleep 10
 
 # Install Kubernetes Dashboard
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml
-sleep 10
 
 # Create Dashboard User
 
@@ -70,8 +59,6 @@ metadata:
   name: admin-user
   namespace: kubernetes-dashboard
 EOF
-
-sleep 1
 
 cat <<EOF | kubectl apply -f -
 apiVersion: rbac.authorization.k8s.io/v1
@@ -87,8 +74,6 @@ subjects:
   name: admin-user
   namespace: kubernetes-dashboard
 EOF
-
-sleep 5
 
 kubectl -n kubernetes-dashboard get secret "$(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}")" -o go-template="{{.data.token | base64decode}}" >> /vagrant/configs/token
 
